@@ -13,7 +13,7 @@
 2. 1.にて作成された学習済みモデルに、適当な座標数を入力する。以下のコマンドを実行する：  
    python explore_siren_ipynb_eval6.py --omega=30 --model_path=logs/experiment_oo/checkpoints/model_final.pth --output_dir=logs/experiment_oo/w30_hl1_1024 --hidden_layers=1 --sidelen=1024
    - omega：基本30でいい。train_img.pyでは30で固定している。
-   - model_path：学習済みモデル
+   - model_path：入力ファイル（学習済みモデル）
    - output_dir：出力ディレクトリ（学習済みモデルにて作成される出力画像を保存するフォルダ）
    - hidden_layers：隠れ層の数
    - sidelen：座標数
