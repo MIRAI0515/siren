@@ -15,7 +15,7 @@ from functools import partial
 p = configargparse.ArgumentParser()
 p.add('-c', '--config_filepath', required=False, is_config_file=True, help='Path to config file.')
 
-p.add_argument('--logging_root', type=str, default='/mnt/siren/logs', help='root for logging')
+p.add_argument('--logging_root', type=str, default='./logs', help='root for logging') # 変更箇所
 p.add_argument('--experiment_name', type=str, required=True, # default="experiment_240613_2204_EGFP_resized_512x512_no_resize_sine_10000_w30_hl2",# 変更箇所 
                help='Name of subdirectory in logging_root where summaries and checkpoints will be saved.')
 
