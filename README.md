@@ -43,9 +43,9 @@ python experiment_scripts/train_img.py \
 --num_hidden_layers=1 \
 --experiment_name=experiment_oo
 ```
-   - input_path：入力ファイル（学習したい画像）
-   - num_hidden_layers：隠れ層の数
-   - experiment_name：出力ディレクトリ（学習済みモデルや各層ごとの画像を保存するフォルダ名）
+- input_path：入力ファイル（学習したい画像）
+- num_hidden_layers：隠れ層の数
+- experiment_name：出力ディレクトリ（学習済みモデルや各層ごとの画像を保存するフォルダ名）
 
 </details>
 
@@ -67,6 +67,7 @@ python explore_siren_ipynb_eval6.py \
 - sidelen：座標数
   
 </details>
+
   
 ## 補足
 tmuxを用いて、コマンドを連続的に実行することが出来る。以下のコマンドのように実行できる。
