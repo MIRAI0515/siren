@@ -70,6 +70,8 @@ python explore_siren_ipynb_eval6.py \
   
 ## 補足
 tmuxを用いて、コマンドを連続的に実行することが出来る。以下のコマンドのように実行できる。
+```
 python experiment_scripts/train_img.py --model_type=sine --input_path=/mnt/siren/mip_nd2_yasuda/230627_Crest_LysMskin_Sham_day13_CD3PE_EB_3D_MIP/240617_1203_EGFP_resized_512x512_no_opencv.tiff --num_hidden_layers=1 --experiment_name=experiment_oo_hl1_eachLayer && \
 python experiment_scripts/train_img.py --model_type=sine --input_path=/mnt/siren/mip_nd2_yasuda/230627_Crest_LysMskin_Sham_day13_CD3PE_EB_3D_MIP/240617_1203_EGFP_resized_512x512_no_opencv.tiff --num_hidden_layers=2 --experiment_name=experiment_oo_hl2_eachLayer && \
 python experiment_scripts/train_img.py --model_type=sine --input_path=/mnt/siren/mip_nd2_yasuda/230627_Crest_LysMskin_Sham_day13_CD3PE_EB_3D_MIP/240617_1203_EGFP_resized_512x512_no_opencv.tiff --num_hidden_layers=3 --experiment_name=experiment_oo_hl3_eachLayer
+```
