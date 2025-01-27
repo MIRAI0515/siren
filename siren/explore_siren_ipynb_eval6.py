@@ -48,6 +48,7 @@ class SingleBVPNet(torch.nn.Module):
     def __init__(self, in_features=2, out_features=1, hidden_features=256, num_hidden_layers=7, omega=30):
         super().__init__()
         self.net = FCBlock(in_features, out_features, num_hidden_layers, hidden_features, omega, outermost_linear=True)
+        # print(num_hidden_layers)
 
     def forward(self, coords):
         return self.net(coords)
@@ -102,19 +103,31 @@ print(f"Max: {stats['max']}")
 print(f"Average: {stats['average']}")
 print(f"Median: {stats['median']}")
 
-# 画像保存
+# -1より小さいものは-1に、1より大きいものは1に設定（torch.clampを使用）
+model_output_clamp = torch.clamp(torch.tensor(model_output), min=-1, max=1)
+# -1~1を0~255に変換
+model_output_clamp = ((model_output_clamp + 1) * 127.5).to(torch.uint8) # 整数でないと、model_output_processed_rgb.pngが出力されなかった。
+
+# 出力をCPUに移してNumPy配列に変換
+model_output_clamp_np = model_output_clamp.cpu().view(opt.sidelen, opt.sidelen).detach().numpy()
+
+# （SIRENを通した後の）画像を保存（輝度値0~255を考慮）
 output_image_path = os.path.join(opt.output_dir, f'{opt.sidelen}_model_output.png')
-plt.imshow(model_output, cmap='gray')
+plt.imshow(model_output_clamp_np, cmap='gray')
 plt.title(f'Model Output ({opt.sidelen}x{opt.sidelen})')
 plt.colorbar()
 plt.savefig(output_image_path)
 plt.close()
 print(f"Model output saved to {output_image_path}")
 
-# TIFFファイルとして保存
+
+# NumPy配列をTIFF形式で保存する
 output_tiff_path = os.path.join(opt.output_dir, f'{opt.sidelen}_model_output.tiff')
-Image.fromarray((model_output * 255).astype(np.uint8)).save(output_tiff_path, format='TIFF')
+# PILを使用してTIFF画像を保存
+image = Image.fromarray(model_output_clamp_np)
+image.save(output_tiff_path, format="TIFF")
 print(f"Model output saved to {output_tiff_path}")
+
 
 # 修正処理
 if opt.sidelen >= 3:
